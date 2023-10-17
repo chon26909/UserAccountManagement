@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import ENDPOINTS from "../../constant/endpoints";
-import { IUser, IUserListResponse } from "../../types/user";
-import axios from "axios";
+import { IUser } from "../../types/user";
+import * as userService from "../../service/userService";
 
 interface IUserStore {
   loading: boolean;
@@ -13,11 +12,10 @@ export const getAllUser = createAsyncThunk(
   "users/getAllUser",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get<IUserListResponse>(ENDPOINTS.USER_LIST);
-      return response.data;
+      const { data } = await userService.getAllUser();
+      return data;
     } catch (error) {
-      console.log("Failed to get user list", error);
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
   }
 );
@@ -36,12 +34,13 @@ const productSlice = createSlice({
     builder.addCase(getAllUser.pending, (state) => {
       state.loading = true;
       state.data = [];
+      state.total = 0;
     });
     builder.addCase(getAllUser.fulfilled, (state, action) => {
       console.log("fulfilled", action);
       state.loading = false;
-      state.data = action.payload?.users || [];
-      state.total = action.payload?.total || 0;
+      state.data = action.payload.users;
+      state.total = action.payload.total;
     });
     builder.addCase(getAllUser.rejected, (state, action) => {
       console.log("rejected", action);
