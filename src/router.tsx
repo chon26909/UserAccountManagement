@@ -56,6 +56,15 @@ const router = createBrowserRouter([
       element: <route.element />,
     })),
   },
+  // {
+  //   path: "/lazy",
+  //   async lazy() {
+  //     const UserPage = await import("./pages/users/UserPage");
+  //     return {
+  //       Component: UserPage,
+  //     };
+  //   },
+  // },
 ]);
 
 export default router;
