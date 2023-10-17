@@ -5,7 +5,7 @@ const ENDPOINTS = {
   AUTH_LOGIN: `${baseUrl}/auth/login`,
 
   // users
-  USER_LIST: `${baseUrl}/userss`,
+  USER_LIST: `${baseUrl}/users`,
 };
 
 export default ENDPOINTS;
