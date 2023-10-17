@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ENDPOINTS from "../../constant/endpoints";
 import { IUser, IUserListResponse } from "../../types/user";
+import axios from "axios";
 
 interface IUserStore {
   loading: boolean;
@@ -12,23 +13,8 @@ export const getAllUser = createAsyncThunk(
   "users/getAllUser",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await new Promise<IUserListResponse>(
-        (resolve, reject) => {
-          fetch(ENDPOINTS.USER_LIST)
-            .then<IUserListResponse>((res) => {
-              resolve(res.json());
-              return res.json();
-            })
-            .catch((err) => {
-              reject(err);
-            });
-        }
-      );
-
-      console.log("response", response);
-
-      // const response = await axios.get<IUserListResponse>(ENDPOINTS.USER_LIST);
-      return response;
+      const response = await axios.get<IUserListResponse>(ENDPOINTS.USER_LIST);
+      return response.data;
     } catch (error) {
       console.log("Failed to get user list", error);
       rejectWithValue(error);
