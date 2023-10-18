@@ -6,6 +6,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "./layouts/DefaultLayout";
 import HomePage from "./pages/HomePage";
 import UserPage from "./pages/users/UserPage";
+import UserPosts from "./pages/users/UserPosts";
 
 type GroupRoute = "public" | "private";
 
@@ -20,18 +21,20 @@ const routes: Record<GroupRoute, IRoute[]> = {
     {
       path: "login",
       element: LoginPage,
-      role: [ROLE_USER.UNKNOWN],
     },
     {
       path: "register",
       element: RegisterPage,
-      role: [ROLE_USER.UNKNOWN],
     },
   ],
   private: [
     {
       path: "users",
       element: UserPage,
+    },
+    {
+      path: "users/:userId/posts",
+      element: UserPosts,
     },
   ],
 };
