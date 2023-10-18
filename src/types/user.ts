@@ -1,15 +1,3 @@
-export interface IPagination {
-  total: number;
-  limit: number;
-  skip: number;
-}
-
-export type IUserListRequest = Pick<IPagination, "limit" | "skip">;
-
-export interface IUserListResponse extends IPagination {
-  users: IUser[];
-}
-
 export interface IUser {
   id: number;
   firstName: string;
