@@ -6,6 +6,7 @@ const ENDPOINTS = {
 
   // users
   USER_LIST: `${baseUrl}/users`,
+  USER_POST_LIST: `${baseUrl}/users/:userId/posts`,
 };
 
 export default ENDPOINTS;
