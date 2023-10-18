@@ -1,7 +1,24 @@
 import axios from "axios";
-import { IUserListResponse } from "../types/user";
 import ENDPOINTS from "../constant/endpoints";
+import { IUser } from "../types/user";
+import { IPagination } from "../types/pagination";
+import { IPost } from "../types/post";
+
+export type IUserListRequest = Pick<IPagination, "limit" | "skip">;
+
+export interface IUserListResponse extends IPagination {
+  users: IUser[];
+}
+
+export interface IUserPostListResponse extends IPagination {
+  posts: IPost[];
+}
 
 export const getAllUser = () => {
   return axios.get<IUserListResponse>(ENDPOINTS.USER_LIST);
+};
+
+export const getUserPostList = (userId: string) => {
+  const url = ENDPOINTS.USER_POST_LIST.replace(":userId", userId);
+  return axios.get<IUserPostListResponse>(url);
 };
