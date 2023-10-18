@@ -14,8 +14,8 @@ export interface IUserPostListResponse extends IPagination {
   posts: IPost[];
 }
 
-export const getAllUser = () => {
-  return axios.get<IUserListResponse>(ENDPOINTS.USER_LIST);
+export const getAllUser = (data: IUserListRequest) => {
+  return axios.get<IUserListResponse>(ENDPOINTS.USER_LIST, { params: data });
 };
 
 export const getUserPostList = (userId: string) => {

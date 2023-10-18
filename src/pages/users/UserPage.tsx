@@ -1,6 +1,6 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelection } from "../../redux/store";
-import { getAllUser } from "../../redux/slices/userSlice";
+import { getAllUser, getUserMore } from "../../redux/slices/userSlice";
 // import ReactPullToRefresh from "react-pull-to-refresh";
 import UserList from "../../features/users/UserList";
 import "../../styles/user.scss";
@@ -10,8 +10,19 @@ const UserPage: FC = () => {
   const { data, loading, total } = useAppSelection((state) => state.users);
   const dispatch = useAppDispatch();
 
+  const [page, setPage] = useState(1);
+  const [perPage] = useState(20);
+
   const fetchUsers = async () => {
-    await dispatch(getAllUser());
+    await dispatch(getAllUser({ limit: perPage, skip: (page - 1) * perPage }));
+  };
+
+  const fetchMore = async () => {
+    const newPage = page + 1;
+    setPage(newPage);
+    await dispatch(
+      getUserMore({ limit: perPage, skip: (newPage - 1) * perPage })
+    );
   };
 
   useEffect(() => {
@@ -27,7 +38,7 @@ const UserPage: FC = () => {
     // <ReactPullToRefresh onRefresh={fetchUsers}>
     <InfiniteScroll
       dataLength={data.length}
-      next={() => {}}
+      next={fetchMore}
       hasMore={true}
       loader={<h4>Loading...</h4>}
       endMessage={

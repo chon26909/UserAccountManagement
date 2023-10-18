@@ -10,9 +10,31 @@ interface IUserStore {
 
 export const getAllUser = createAsyncThunk(
   "users/getAllUser",
-  async (_, { rejectWithValue }) => {
+  async (
+    { limit, skip }: userService.IUserListRequest,
+    { rejectWithValue }
+  ) => {
+    console.log("createAsyncThunk :", limit, skip);
+
     try {
-      const { data } = await userService.getAllUser();
+      const { data } = await userService.getAllUser({ limit, skip });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getUserMore = createAsyncThunk(
+  "users/getUserMore",
+  async (
+    { limit, skip }: userService.IUserListRequest,
+    { rejectWithValue }
+  ) => {
+    console.log("createAsyncThunk :", limit, skip);
+
+    try {
+      const { data } = await userService.getAllUser({ limit, skip });
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -47,6 +69,12 @@ const productSlice = createSlice({
       state.loading = false;
       state.data = [];
       state.total = 0;
+    });
+    builder.addCase(getUserMore.fulfilled, (state, action) => {
+      console.log("state", state);
+      console.log("action", action);
+
+      state.data = [...state.data, ...action.payload.users];
     });
   },
 });
