@@ -5,6 +5,7 @@ import { getAllUser, getUserMore } from "../../redux/slices/userSlice";
 import UserList from "../../features/users/UserList";
 import "../../styles/user.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
+import UserTable from "../../features/users/UserTable";
 
 const UserPage: FC = () => {
   const { data, loading, total } = useAppSelection((state) => state.users);
@@ -12,6 +13,9 @@ const UserPage: FC = () => {
 
   const [page, setPage] = useState(1);
   const [perPage] = useState(20);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [displayMode, setDisplayMode] = useState<"grid" | "table">("table");
 
   const fetchUsers = async () => {
     await dispatch(getAllUser({ limit: perPage, skip: (page - 1) * perPage }));
@@ -32,6 +36,10 @@ const UserPage: FC = () => {
 
   if (loading) {
     return <div>loading...</div>;
+  }
+
+  if (displayMode === "table") {
+    return <UserTable data={data} />;
   }
 
   return (
