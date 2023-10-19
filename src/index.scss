@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #287cff;
+    --background: white;
+    --text-primary: black;
+    --text-primary: green;
+    --sidebar-width: 17rem;
+    --gradient-purple-blue: linear-gradient(45deg,
+            rgba(103, 21, 205, 1) 0%,
+            rgba(37, 113, 250, 1) 100%);
+    ;
+    --gradient-orange-yellow: linear-gradient(45deg, rgba(252, 79, 27, 1) 0%, rgba(247, 178, 50, 1) 100%);
+    --gradient-green-yellowgreen: linear-gradient(48deg, rgba(9,177,150,1) 0%, rgba(144,200,65,1) 100%);
+    --gradient-pink-orange: linear-gradient(48deg, rgba(239,10,116,1) 0%, rgba(254,100,8,1) 100%);
+
+    --white: #ffffff;
+    --gray-dark: #838383;
+    --gray-darkest: #565656;
+    --gray-label: #212121;
+    --gray: #CACACA;
+    --gray-light: #DADFE3;
+    --gray-lighter: #F8F8F8;
+    --gray-tag: #F4F6F6;
+    --gray-text: #7D848B;
+    --blue-fade-dark: #72ACDE;
+    --sky: #32BBFF;
+    --navy-blue: #22385B;
+    --blue-lighter: #F2F9FF;
+    --blue-dark: #16499B;
+    --blue-primary: #0259C3;
+    --blue-secondary: #0974BA;
+    --green-fade: #EDFBE0;
+    --green-primary: #70B412;
+    --green-dark: #4F9800;
+    --red-fade: #FEE8E3;
+    --red-fade-2: #FFF2EF;
+    --red-primary: #DB0000;
+    --orange-primary: #F08700;
+    --orange-fade: #FFF2DF;
+    --orange-darkest: #F48900;
+    --black: #212121;
+}
+
+* { 
+    box-sizing: border-box;
+}
+
+body, #root {
+    min-height: 100vh;
+}
+
+input { 
+    display: block;
+}
+
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear
+{
+    display: none;
+}
+
+[data-theme='dark'] {
+    --background: black;
+    --text-primary: white;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(194, 194, 194);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(164, 164, 164);
+}
+
+div, span, p, ul, li, input, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Kanit', sans-serif;
+}
