@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
   return (
-    <div className="container mx-auto">
+    <div className="max-w-[1100px] mx-auto">
       <Outlet />
     </div>
   );
