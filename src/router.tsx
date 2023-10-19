@@ -7,6 +7,7 @@ import DefaultLayout from "./layouts/DefaultLayout";
 import HomePage from "./pages/HomePage";
 import UserPage from "./pages/users/UserPage";
 import UserPosts from "./pages/users/UserPosts";
+import AdminLayout from "./layouts/AdminLayout";
 
 type GroupRoute = "public" | "private";
 
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
+    element: <AdminLayout />,
     children: routes.private.map((route) => ({
       path: route.path,
       element: <route.element />,
