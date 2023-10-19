@@ -4,7 +4,11 @@ import { IUser } from "../types/user";
 import { IPagination } from "../types/pagination";
 import { IPost } from "../types/post";
 
-export type IUserListRequest = Pick<IPagination, "limit" | "skip">;
+export type IUserListRequest = {
+  limit: number;
+  skip: number;
+  q?: string;
+};
 
 export interface IUserListResponse extends IPagination {
   users: IUser[];

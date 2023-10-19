@@ -11,13 +11,17 @@ interface IUserStore {
 export const getAllUser = createAsyncThunk(
   "users/getAllUser",
   async (
-    { limit, skip }: userService.IUserListRequest,
+    { q, limit, skip }: userService.IUserListRequest,
     { rejectWithValue }
   ) => {
     console.log("createAsyncThunk :", limit, skip);
 
     try {
-      const { data } = await userService.getAllUser({ limit, skip });
+      const { data } = await userService.getAllUser({
+        limit,
+        skip,
+        q: q || "",
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -28,13 +32,17 @@ export const getAllUser = createAsyncThunk(
 export const getUserMore = createAsyncThunk(
   "users/getUserMore",
   async (
-    { limit, skip }: userService.IUserListRequest,
+    { q, limit, skip }: userService.IUserListRequest,
     { rejectWithValue }
   ) => {
     console.log("createAsyncThunk :", limit, skip);
 
     try {
-      const { data } = await userService.getAllUser({ limit, skip });
+      const { data } = await userService.getAllUser({
+        limit,
+        skip,
+        q: q || "",
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error);
