@@ -5,7 +5,7 @@ const ENDPOINTS = {
   AUTH_LOGIN: `${baseUrl}/auth/login`,
 
   // users
-  USER_LIST: `${baseUrl}/users`,
+  USER_LIST: `${baseUrl}/users/search`,
   USER_POST_LIST: `${baseUrl}/users/:userId/posts`,
 };
 
