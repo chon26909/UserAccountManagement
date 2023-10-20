@@ -1,13 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelection } from "../../redux/store";
 import { getAllUser, getUserMore } from "../../redux/slices/userSlice";
-// import ReactPullToRefresh from "react-pull-to-refresh";
 import UserList from "../../features/users/UserList";
-import "../../styles/user.scss";
 import InfiniteScroll from "react-infinite-scroll-component";
 import UserTable from "../../features/users/UserTable";
 import UserFilter from "../../features/users/UserFilter";
-import Button from "../../components/Button";
+import HeaderPageUser from "../../features/users/HeaderPageUser";
+import "../../styles/user.scss";
 
 const UserPage: FC = () => {
   const { data, loading, total } = useAppSelection((state) => state.users);
@@ -43,15 +42,7 @@ const UserPage: FC = () => {
   if (displayMode === "table") {
     return (
       <>
-        <div className="flex justify-between items-end">
-          <h2 className="my-3 text-[32px] font-bold">
-            User Account Management
-          </h2>
-          <div>
-            <Button className="bg-primary w-[200px]">Add User</Button>
-          </div>
-        </div>
-
+        <HeaderPageUser />
         <UserFilter />
         <UserTable loading={loading} data={data} />
       </>
