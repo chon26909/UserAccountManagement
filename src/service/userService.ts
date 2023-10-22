@@ -22,6 +22,7 @@ export interface ICreateUesrRequest {
     firstName: string;
     lastName: string;
     age: number;
+    gender: string;
 }
 
 export const getAllUser = (data: IUserListRequest) => {
