@@ -3,7 +3,7 @@ import Button from '../../components/Button';
 import ModalCreateUser from './ModalCreateUser';
 
 const HeaderPageUser = () => {
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     return (
         <>
