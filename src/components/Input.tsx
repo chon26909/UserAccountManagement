@@ -6,11 +6,12 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
     errorMessage?: string;
     full?: boolean;
+    ref?: React.RefObject<HTMLInputElement>;
 }
 
 const inputClass = 'text-[16px] mt-1 px-3 py-2 bg-white border shadow-sm border-gray_text rounded placeholder-slate-400 focus:outline-none';
 
-const InputText = ({ label, full, errorMessage, ...other }: Props) => {
+const InputText = ({ label, full, errorMessage, ref, ...other }: Props) => {
     return (
         <div className={[full ? 'w-full' : 'inline-block', ' mt-2'].join(' ')}>
             <label htmlFor='text' className='block'>
@@ -18,6 +19,7 @@ const InputText = ({ label, full, errorMessage, ...other }: Props) => {
             </label>
             <input
                 {...other}
+                ref={ref}
                 type='text'
                 className={[
                     full ? 'w-full' : 'w-[250px]',
@@ -29,7 +31,7 @@ const InputText = ({ label, full, errorMessage, ...other }: Props) => {
         </div>
     );
 };
-const InputPassword: FC<Props> = ({ label, full, errorMessage, ...other }) => {
+const InputPassword: FC<Props> = ({ label, full, errorMessage, ref, ...other }) => {
     const [show, setShow] = useState(false);
 
     return (
@@ -40,6 +42,7 @@ const InputPassword: FC<Props> = ({ label, full, errorMessage, ...other }) => {
             <div className='relative'>
                 <input
                     {...other}
+                    ref={ref}
                     type={show ? 'text' : 'password'}
                     className={[
                         full ? 'w-full' : 'w-[250px]',
