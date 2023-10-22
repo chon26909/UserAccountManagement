@@ -9,7 +9,7 @@ interface IUserStore {
 }
 
 export const getAllUser = createAsyncThunk('users/getAllUser', async ({ q, limit, skip }: userService.IUserListRequest, { rejectWithValue }) => {
-    console.log('createAsyncThunk :', limit, skip);
+    // console.log('createAsyncThunk :', limit, skip);
 
     try {
         const { data } = await userService.getAllUser({
@@ -79,9 +79,9 @@ const productSlice = createSlice({
         });
         builder
             .addCase(createUser.fulfilled, (state, action) => {
-                console.log('fulfilled', action, state);
+                console.log('payload', action.payload);
 
-                //                state.data = [...state.data, ...action.payload.users];
+                state.data = [action.payload, ...state.data];
             })
             .addCase(createUser.rejected, (state, action) => {
                 console.log('rejected', action, state);
