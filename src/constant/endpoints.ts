@@ -7,7 +7,9 @@ const ENDPOINTS = {
     // users
     USER_LIST: `${baseUrl}/users/search`,
     USER_POST_LIST: `${baseUrl}/users/:userId/posts`,
-    CREATE_USER: `${baseUrl}/users/add`
+    CREATE_USER: `${baseUrl}/users/add`,
+    UPDATE_USER: `${baseUrl}/users/:userId`,
+    DELETE_USER: `${baseUrl}/users/:userId`
 };
 
 export default ENDPOINTS;
