@@ -80,7 +80,7 @@ const Dialog: FC<IDialogProps> = (props) => {
                         <div className='text-center'>{message || ''}</div>
                         <div className='text-center mt-3'>
                             <Button
-                                className='mx-2 px-[4rem] bg-tranperent border-gray border-[1px] box-border border=[1px] text-black'
+                                className='mx-2 px-[4rem] !text-black bg-tranperent border-gray border-[1px] box-border border=[1px]'
                                 onClick={onCancel}
                             >
                                 ยกเลิก
