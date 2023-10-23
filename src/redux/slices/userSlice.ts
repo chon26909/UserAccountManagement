@@ -45,6 +45,26 @@ export const createUser = createAsyncThunk('users/createUser', async (body: user
     }
 });
 
+export const updateUser = createAsyncThunk('users/updateUser', async (data: userService.IUpdateUserRequest, { rejectWithValue }) => {
+    try {
+        //fack =update user
+        //await userService.updateUser(data.id, data);
+        return data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+export const deleteUser = createAsyncThunk('users/deleteUser', async (id: number, { rejectWithValue }) => {
+    try {
+        //fack delete user
+        await userService.deleteUser(id);
+        return id;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
 const initialState: IUserStore = {
     loading: false,
     data: [],
@@ -74,18 +94,41 @@ const productSlice = createSlice({
                 state.data = [];
                 state.total = 0;
             });
-        builder.addCase(getUserMore.fulfilled, (state, action) => {
-            state.data = [...state.data, ...action.payload.users];
-        });
+        builder
+            .addCase(getUserMore.fulfilled, (state, action) => {
+                state.data = [...state.data, ...action.payload.users];
+            })
+            .addCase(getUserMore.rejected, (_, action) => {
+                console.log('getUserMore rejected', action);
+            });
         builder
             .addCase(createUser.fulfilled, (state, action) => {
-                console.log('payload', action.payload);
+                // console.log('payload', action.payload);
 
-                state.data = [action.payload, ...state.data];
+                const newUser = {
+                    ...action.payload,
+                    id: state.data.length + 1
+                };
+
+                state.data = [newUser, ...state.data];
             })
             .addCase(createUser.rejected, (state, action) => {
                 console.log('rejected', action, state);
             });
+        builder.addCase(updateUser.fulfilled, (state, action) => {
+            state.data = state.data.map((row) => {
+                if (row.id === action.payload.id) {
+                    return {
+                        ...row, // copy old data
+                        ...action.payload // new data updated
+                    };
+                }
+                return row;
+            });
+        });
+        builder.addCase(deleteUser.fulfilled, (state, action) => {
+            state.data = state.data.filter((row) => row.id !== action.payload);
+        });
     }
 });
 
