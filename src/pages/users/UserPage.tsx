@@ -3,20 +3,19 @@ import { useAppDispatch, useAppSelection } from '../../redux/store';
 import { getAllUser, getUserMore } from '../../redux/slices/userSlice';
 import UserList from '../../features/users/UserList';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import UserTable from '../../features/users/UserTable';
+import TableUser from '../../features/users/TableUser';
 import UserFilter from '../../features/users/UserFilter';
 import HeaderPageUser from '../../features/users/HeaderPageUser';
 import '../../styles/user.scss';
 import DisplayMode from '../../features/users/DisplayMode';
 
 const UserPage: FC = () => {
-    const { data, loading, total } = useAppSelection((state) => state.users);
+    const { data, loading } = useAppSelection((state) => state.users);
     const dispatch = useAppDispatch();
 
     const [page, setPage] = useState(1);
     const [perPage] = useState(20);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [displayMode, setDisplayMode] = useState<'grid' | 'table'>('table');
 
     const fetchUsers = async () => {
@@ -41,10 +40,10 @@ const UserPage: FC = () => {
     if (displayMode === 'table') {
         return (
             <>
-                <DisplayMode mode={displayMode} setMode={setDisplayMode} />
                 <HeaderPageUser />
                 <UserFilter />
-                <UserTable loading={loading} data={data} />
+                <DisplayMode mode={displayMode} setMode={setDisplayMode} />
+                <TableUser loading={loading} data={data} />
                 {/* <ModalCreateUser show={false} close={() => {}} /> */}
             </>
         );
@@ -70,7 +69,7 @@ const UserPage: FC = () => {
                 releaseToRefreshContent={<h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>}
             >
                 <div className='p-5'>
-                    <div>Total user {total} account</div>
+                    <div>Total user {data.length} account</div>
                     <UserList users={data} />
                 </div>
             </InfiniteScroll>
